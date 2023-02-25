@@ -16,10 +16,12 @@ router.post(
   "",
   [
     body("name").exists().isString().notEmpty().withMessage("invalid name"),
+    body("userId").exists().isInt().notEmpty().withMessage("invalid userId"),
     body("priority")
       .exists()
       .isInt({ gt: 0, lt: 6 })
       .withMessage("invalid priority"),
+     
   ],
   validationResultMiddleware,
   createTaskController

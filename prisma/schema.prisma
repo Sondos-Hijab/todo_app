@@ -14,4 +14,13 @@ model Task {
   name String
   priority Int
   completed  Boolean @default(false)
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+}
+
+model User {
+  id Int @id @default(autoincrement()) 
+  username String @unique
+  password String
+  tasks Task[]
 }
