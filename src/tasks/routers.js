@@ -12,7 +12,6 @@ import { validationResultMiddleware } from "../validators.js";
 // create router instance
 const router = express.Router();
 
-
 router.post(
   "",
   [
