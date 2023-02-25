@@ -26,7 +26,7 @@ export const createUserController = async (req, res, next) => {
   };
   export const getUserController = async (req, res, next) => {
     try {
-      const data = await getUser(req.params.id);
+      const data = await getUser(parseInt(req.params.id));
       res.send({
         success: true,
         data,

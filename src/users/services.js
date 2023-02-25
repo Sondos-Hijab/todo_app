@@ -11,14 +11,26 @@ export const login = async (username) => {
     return username
 }
 
-export const getUser = async (id) => {
+/* export const getUser = async (id) => {
     return id
+} */
+export const getUser = async (id) => {
+    return await prisma.user.findUnique({
+        where: {
+            id
+        }, include: {
+            tasks: {
+                where: {
+                    completed: true
+                }
+            },
+            _count: {
+                select: {
+                    tasks: true
+                }
+            }
+          }
+    })
 }
 
-/* export const getUser = async (id) => {
-return await prisma.user.findUnique({
-    where: {
-      id,
-    },
-  });
-}; */
+
