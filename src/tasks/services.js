@@ -35,12 +35,19 @@ export const getTask = async (id) => {
   });
 };
 
-
 export const updateTask = async (id, data) => {
+  return await prisma.task.update({
+    where: {
+      id,
+    },
+    data,
+  });
+};
+/* export const updateTask = async (id, data) => {
   return {
     name: 'task'
   }
-};
+}; */
 
 export const deleteTask = async (id) => {
   return {
