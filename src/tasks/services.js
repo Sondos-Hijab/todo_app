@@ -1,18 +1,40 @@
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
 export const createTask = async (data) => {
-  return data
+  return await prisma.task.create({
+    data,
+  });
 };
 
-export const getTasks = async () => {
-  return [{
-    name: 'task'
-  }]
+
+export const getTasks = async (filters) => {
+  if (filters && Object.keys(filters).length > 0) {
+    console.log(filters)
+    return await prisma.task.findMany({
+      where: {
+        ...filters,
+        priority: +filters.priority
+      }
+    });
+  
+  }
+  return await prisma.task.findMany();
 };
+
+/* export const getTasks = async () => {
+  return await prisma.task.findMany();
+}; */
 
 export const getTask = async (id) => {
-  return {
-    name: 'task'
-  }
+  return await prisma.task.findUnique({
+    where: {
+      id,
+    },
+  });
 };
+
 
 export const updateTask = async (id, data) => {
   return {

@@ -23,7 +23,9 @@ export const createTaskController = async (req, res, next) => {
 
 export const getTasksController = async (req, res, next) => {
   try {
-    const data = await getTasks();
+    const filters = req.query;
+    console.log(filters);
+    const data = await getTasks(filters);
     res.send({
       success: true,
       data,
